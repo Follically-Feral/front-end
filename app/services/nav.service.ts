@@ -1,7 +1,8 @@
-import {Injectable, Type} from 'angular2/core';
+import {Injectable} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, RouteRegistry} from 'angular2/router';
 
 import {AppComponent} from "../components/app.component";
+import Type = ts.Type;
 
 @Injectable()
 export class NavService {

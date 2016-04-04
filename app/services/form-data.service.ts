@@ -5,8 +5,7 @@ import {DropdownQuestion}   from "../directives/dynamic-form/models/question-dro
 import {TextboxQuestion}    from "../directives/dynamic-form/models/question-textbox";
 import {User}               from "../models/user";
 import {FormButtonInterface} from "../directives/form-buttons/form-button.interface";
-import {Group} from "../models/group";
-import {Project} from "../models/project";
+import {Group}              from "../models/group";
 
 @Injectable()
 export class FormDataService {
@@ -95,157 +94,6 @@ export class FormDataService {
 
     }
 
-    getProjectDetailData(project: Project) {
-
-        return Promise.resolve(project).then(project => {
-            let questionData:QuestionBase<any>[] = [
-                new TextboxQuestion({
-                    key:'key',
-                    label:'Key',
-                    value:project.key,
-                    order: 1,
-                    read_only: true,
-                    type: 'text'
-                }),
-                new TextboxQuestion({
-                    key:'name',
-                    label:'Name',
-                    value:project.name,
-                    order: 2,
-                    read_only: true,
-                    type: 'text'
-                }),
-                new TextboxQuestion({
-                    key:'description',
-                    label:'Description',
-                    value:project.description,
-                    order: 3,
-                    type: 'text'
-                }),
-                new TextboxQuestion({
-                    key:'url',
-                    label:'Project Url',
-                    value:project.url,
-                    order: 4,
-                    type: 'text'
-                }),
-                new TextboxQuestion({
-                    key:'git_url',
-                    label:'Git Url',
-                    value:project.git_url,
-                    required: true,
-                    order: 5,
-                    type: 'text'
-                }),
-                new TextboxQuestion({
-                    key:'lead_user',
-                    label:'Project Lead',
-                    value:(project.lead_user)?project.lead_user.forename+' '+project.lead_user.surname:'',
-                    required: true,
-                    order: 6,
-                    type: 'text',
-                    search_box: true
-                }),
-                new DropdownQuestion({
-                    key:'status',
-                    label: 'Status',
-                    required: true,
-                    options: [
-                        {key:'Development',  value:'Development', selected:(project.status === 'Development')?true:false},
-                        {key:'Live',  value:'Live', selected:(project.status === 'Live')?true:false}
-                    ],
-                    order: 6
-                }),
-                new TextboxQuestion({
-                    key:'selectedSearchValue',
-                    label:'selectedSearchValue',
-                    value:(project.lead_user)?project.lead_user.id:'',
-                    order: 7,
-                    type: 'hidden'
-                }),
-            ];
-
-            return questionData.sort((a,b) => a.order - b.order);
-        });
-
-    }
-
-    getProjectCreateData() {
-
-        return Promise.resolve().then(() => {
-            let questionData:QuestionBase<any>[] = [
-                new TextboxQuestion({
-                    key:'key',
-                    label:'Key',
-                    value:'',
-                    order: 1,
-                    read_only: true,
-                    type: 'text'
-                }),
-                new TextboxQuestion({
-                    key:'name',
-                    label:'Name',
-                    value:'',
-                    required: true,
-                    order: 2,
-                    type: 'text',
-                    update_field: 'key'
-                }),
-                new TextboxQuestion({
-                    key:'description',
-                    label:'Description',
-                    value:'',
-                    order: 3,
-                    type: 'text'
-                }),
-                new TextboxQuestion({
-                    key:'url',
-                    label:'Project Url',
-                    value:'',
-                    order: 4,
-                    type: 'text'
-                }),
-                new TextboxQuestion({
-                    key:'git_url',
-                    label:'Git Url',
-                    value:'',
-                    required: true,
-                    order: 5,
-                    type: 'text'
-                }),
-                new TextboxQuestion({
-                    key:'lead_user',
-                    label:'Project Lead',
-                    value:'',
-                    required: true,
-                    order: 6,
-                    type: 'text',
-                    search_box: true
-                }),
-                new DropdownQuestion({
-                    key:'status',
-                    label: 'Status',
-                    required: true,
-                    options: [
-                        {key:'Development', value:'Development', selected:true},
-                        {key:'Live', value:'Live', selected:false}
-                    ],
-                    order: 7
-                }),
-                new TextboxQuestion({
-                    key:'selectedSearchValue',
-                    label:'selectedSearchValue',
-                    value:'',
-                    order: 8,
-                    type: 'hidden'
-                }),
-            ];
-
-            return questionData.sort((a,b) => a.order - b.order);
-        });
-
-    }
-
     getGroupAddUserData() {
 
         return Promise.resolve().then(() => {
@@ -253,33 +101,6 @@ export class FormDataService {
                 new TextboxQuestion({
                     key:'user',
                     label:'Choose User',
-                    value:'',
-                    required: true,
-                    order: 1,
-                    type: 'text',
-                    search_box: true
-                }),
-                new TextboxQuestion({
-                    key:'selectedSearchValue',
-                    label:'selectedSearchValue',
-                    value:'',
-                    order: 2,
-                    type: 'hidden'
-                }),
-            ];
-
-            return questionData.sort((a,b) => a.order - b.order);
-        });
-
-    }
-
-    getGroupAddProjectData() {
-
-        return Promise.resolve().then(() => {
-            let questionData:QuestionBase<any>[] = [
-                new TextboxQuestion({
-                    key:'project',
-                    label:'Choose Project',
                     value:'',
                     required: true,
                     order: 1,

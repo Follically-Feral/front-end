@@ -12,8 +12,6 @@ import {ServiceInterface}           from "../interfaces/service.interface";
 import {MessagesService}            from "../directives/messages/messages.service";
 import {TableService}               from "../directives/tables/table.service";
 import {TableDataService}           from "./table-data.service";
-import {ProjectService}             from "./project.service";
-import {Project}                    from "../models/project";
 
 @Injectable()
 export class GroupService implements ServiceInterface {
@@ -29,8 +27,7 @@ export class GroupService implements ServiceInterface {
         private _userService:UserService,
         private _messageService:MessagesService,
         private _tableService:TableService,
-        private _tableDataService:TableDataService,
-        private _projectService: ProjectService
+        private _tableDataService:TableDataService
     ) {
         this.groups$ = Observable.create(observer => this._groupsObserver = observer).share();
     }
@@ -155,21 +152,15 @@ export class GroupService implements ServiceInterface {
     generateData(group: Group) : any {
 
         let userIds : Array<number> = [];
-        let projectIds : Array<number> = [];
 
         if (group.users.length > 0) {
             group.users.forEach(user => userIds.push(user.id));
         }
 
-        if (group.projects.length > 0) {
-            group.projects.forEach(project => projectIds.push(project.id));
-        }
-
         return {
             name: group.name,
             description: group.description,
-            users: userIds,
-            projects: projectIds
+            users: userIds
         };
 
     }
@@ -197,46 +188,6 @@ export class GroupService implements ServiceInterface {
     removeUserFromGroup(groupId: number, userId: number) {
 
         return this._apiService.patchPromise('removeUserFromGroup/'+groupId, {user_id: userId})
-            .then(
-                data => {
-                    this._messageService.addMessage({
-                        success: data.success.message,
-                        error: null
-                    })
-                },
-                error => {
-                    this._messageService.addMessage({
-                        success: null,
-                        error: error.message
-                    })
-                }
-            );
-
-    }
-
-    addProjectToGroup(groupId: number, projectId: number) {
-
-        return this._apiService.patchPromise('addProjectToGroup/'+groupId, {project_id: projectId})
-            .then(
-                data => {
-                    this._messageService.addMessage({
-                        success: data.success.message,
-                        error: null
-                    })
-                },
-                error => {
-                    this._messageService.addMessage({
-                        success: null,
-                        error: error.message
-                    })
-                }
-            );
-
-    }
-
-    removeProjectFromGroup(groupId: number, projectId: number) {
-
-        return this._apiService.patchPromise('removeProjectFromGroup/'+groupId, {project_id: projectId})
             .then(
                 data => {
                     this._messageService.addMessage({
@@ -291,20 +242,10 @@ export class GroupService implements ServiceInterface {
                 group.users = users;
             }
 
-            if (groupProjects.length > 0) {
-                let project: Array<Project> = [];
-                groupProjects.forEach(projectData => {
-                    project.push(this._projectService.create(projectData));
-                });
-                group.projects = project;
-            }
-
             this._groups.push(group);
         }
 
         this.set(this._groups);
-
-        console.log(this._groups);
 
         if (buildTableData) {
             this._tableDataService.getGroupsTableData(this._groups, true, groupsData.paginator)

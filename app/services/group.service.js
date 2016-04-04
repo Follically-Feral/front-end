@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share', "./api.service", "./user.service", "../models/group", "../directives/messages/messages.service", "../directives/tables/table.service", "./table-data.service", "./project.service"], function(exports_1, context_1) {
+System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share', "./api.service", "./user.service", "../models/group", "../directives/messages/messages.service", "../directives/tables/table.service", "./table-data.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, Observable_1, api_service_1, user_service_1, group_1, messages_service_1, table_service_1, table_data_service_1, project_service_1;
+    var core_1, Observable_1, api_service_1, user_service_1, group_1, messages_service_1, table_service_1, table_data_service_1;
     var GroupService;
     return {
         setters:[
@@ -38,20 +38,16 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share', 
             },
             function (table_data_service_1_1) {
                 table_data_service_1 = table_data_service_1_1;
-            },
-            function (project_service_1_1) {
-                project_service_1 = project_service_1_1;
             }],
         execute: function() {
             GroupService = (function () {
-                function GroupService(_apiService, _userService, _messageService, _tableService, _tableDataService, _projectService) {
+                function GroupService(_apiService, _userService, _messageService, _tableService, _tableDataService) {
                     var _this = this;
                     this._apiService = _apiService;
                     this._userService = _userService;
                     this._messageService = _messageService;
                     this._tableService = _tableService;
                     this._tableDataService = _tableDataService;
-                    this._projectService = _projectService;
                     this._groups = [];
                     this.groups$ = Observable_1.Observable.create(function (observer) { return _this._groupsObserver = observer; }).share();
                 }
@@ -144,18 +140,13 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share', 
                 };
                 GroupService.prototype.generateData = function (group) {
                     var userIds = [];
-                    var projectIds = [];
                     if (group.users.length > 0) {
                         group.users.forEach(function (user) { return userIds.push(user.id); });
-                    }
-                    if (group.projects.length > 0) {
-                        group.projects.forEach(function (project) { return projectIds.push(project.id); });
                     }
                     return {
                         name: group.name,
                         description: group.description,
-                        users: userIds,
-                        projects: projectIds
+                        users: userIds
                     };
                 };
                 GroupService.prototype.addUserToGroup = function (groupId, userId) {
@@ -176,36 +167,6 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share', 
                 GroupService.prototype.removeUserFromGroup = function (groupId, userId) {
                     var _this = this;
                     return this._apiService.patchPromise('removeUserFromGroup/' + groupId, { user_id: userId })
-                        .then(function (data) {
-                        _this._messageService.addMessage({
-                            success: data.success.message,
-                            error: null
-                        });
-                    }, function (error) {
-                        _this._messageService.addMessage({
-                            success: null,
-                            error: error.message
-                        });
-                    });
-                };
-                GroupService.prototype.addProjectToGroup = function (groupId, projectId) {
-                    var _this = this;
-                    return this._apiService.patchPromise('addProjectToGroup/' + groupId, { project_id: projectId })
-                        .then(function (data) {
-                        _this._messageService.addMessage({
-                            success: data.success.message,
-                            error: null
-                        });
-                    }, function (error) {
-                        _this._messageService.addMessage({
-                            success: null,
-                            error: error.message
-                        });
-                    });
-                };
-                GroupService.prototype.removeProjectFromGroup = function (groupId, projectId) {
-                    var _this = this;
-                    return this._apiService.patchPromise('removeProjectFromGroup/' + groupId, { project_id: projectId })
                         .then(function (data) {
                         _this._messageService.addMessage({
                             success: data.success.message,
@@ -251,13 +212,6 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share', 
                             });
                             group.users = users_1;
                         }
-                        if (groupProjects.length > 0) {
-                            var project_1 = [];
-                            groupProjects.forEach(function (projectData) {
-                                project_1.push(_this._projectService.create(projectData));
-                            });
-                            group.projects = project_1;
-                        }
                         this_1._groups.push(group);
                     };
                     var this_1 = this;
@@ -265,7 +219,6 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share', 
                         _loop_1(key);
                     }
                     this.set(this._groups);
-                    console.log(this._groups);
                     if (buildTableData) {
                         this._tableDataService.getGroupsTableData(this._groups, true, groupsData.paginator)
                             .then(function (table) { return _this._tableService.addTable(table); });
@@ -278,7 +231,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share', 
                 };
                 GroupService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [api_service_1.ApiService, user_service_1.UserService, messages_service_1.MessagesService, table_service_1.TableService, table_data_service_1.TableDataService, project_service_1.ProjectService])
+                    __metadata('design:paramtypes', [api_service_1.ApiService, user_service_1.UserService, messages_service_1.MessagesService, table_service_1.TableService, table_data_service_1.TableDataService])
                 ], GroupService);
                 return GroupService;
             }());

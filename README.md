@@ -4,7 +4,7 @@ Angular 2 management frontend for Imbalance website.
 Makes use of a REST API to get data and perform server side operations.
 
 ## Server Requirements
-* Node
+* Node 5
 * npm
 
 ## Development Requirements

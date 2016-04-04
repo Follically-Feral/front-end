@@ -1,7 +1,7 @@
 {
-  "name": "imbalance-gaming-management-interface-angular-2",
-  "version": "0.0.3",
-  "description": "Angular 2 management frontend for Imbalance website.",
+  "name": "follically-feral-front-end",
+  "version": "0.0.1",
+  "description": "Angular 2 management frontend for Follically Feral website.",
   "main": "index.html",
   "dependencies": {
     "angular2": "^2.0.0-beta.8",
@@ -34,14 +34,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ImbalanceGaming/imbalance-gaming-management-interface-angular-2.git"
+    "url": "https://github.com/Follically-Feral/front-end.git"
   },
   "keywords": [
-    "Angular 2, Imbalance, Gaming, Management, Interface"
+    "Angular 2, Follically, Feral, Front End"
   ],
   "author": "Christopher Pratt",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/ImbalanceGaming/imbalance-gaming-management-interface-angular-2/issues"
+    "url": "https://github.com/Follically-Feral/front-end/issues"
   }
 }

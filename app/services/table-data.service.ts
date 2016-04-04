@@ -100,52 +100,6 @@ export class TableDataService {
 
     }
 
-    getProjectsTableData(
-        projects: Array<Project>,
-        updateTableConfig:boolean = true,
-        paginatorData?: any
-    ) {
-        return Promise.resolve(projects).then(projects => {
-
-            if (updateTableConfig) {
-                this.updateTableConfig(paginatorData, 'projects-paginator', '\ProjectDetail');
-            }
-
-            this.table.body.rows = [];
-
-            this.table.headers = [
-                <TableHeader>{value: 'Key', show: true},
-                <TableHeader>{value: 'Name', show: true},
-                <TableHeader>{value: 'Description', show: true},
-                <TableHeader>{value: 'Project Lead', show: true},
-                <TableHeader>{value: 'Project URL', show: true},
-                <TableHeader>{value: 'Git URL', show: true},
-                <TableHeader>{value: 'Status', show: true},
-                <TableHeader>{value: 'Deploy', show: false},
-            ];
-
-            projects.forEach(function (project:Project) {
-                this.table.body.rows.push(<TableRow>{
-                    rowId: project.id,
-                    cells: [
-                        <TableCell>{value: project.key, detailCell: true, clickEvent: false},
-                        <TableCell>{value: project.name, detailCell: false, clickEvent: false},
-                        <TableCell>{value: project.description, detailCell: false, clickEvent: false},
-                        <TableCell>{
-                            value: project.lead_user?project.lead_user.forename + ' ' + project.lead_user.surname:'None',
-                            detailCell: false, clickEvent: false},
-                        <TableCell>{value: project.url?project.url:'N/A', detailCell: false, clickEvent: false},
-                        <TableCell>{value: project.git_url, detailCell: false, clickEvent: false},
-                        <TableCell>{value: project.status, detailCell: false, clickEvent: false},
-                        <TableCell>{value: 'deploy', detailCell: false, clickEvent: true},
-                    ]
-                })
-            }, this);
-
-            return this.table;
-        });
-    }
-
     private updateTableConfig(paginatorData: any, id: string, detailURL: string) {
 
         this.table.paginationConfig.itemsPerPage = paginatorData.per_page;
