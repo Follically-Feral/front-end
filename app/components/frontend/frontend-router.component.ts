@@ -7,6 +7,11 @@ import {NavService}         from '../../services/nav.service';
 
 import {NavComponent}       from './navigation/nav.component';
 import {HomeComponent} from "./home/home.component";
+import {AboutComponent} from "./about/about.component";
+import {NewsComponent} from "./news/news.component";
+import {ShopComponent} from "./shop/shop.component";
+import {GalleryComponent} from "./photo-gallery/photo.component";
+import {ContactComponent} from "./contact/contact.component";
 import {MessagesService} from "../../directives/messages/messages.service";
 import {TableService} from "../../directives/tables/table.service";
 import {TableDataService} from "../../services/table-data.service";
@@ -30,7 +35,11 @@ import {TableDataService} from "../../services/table-data.service";
 })
 
 @RouteConfig([
-    {path: '/', as: 'Home', component: HomeComponent, useAsDefault: true}
+    {path: '/', as: 'Home', component: HomeComponent, useAsDefault: true},
+    {path: '/about', as: 'About', component: AboutComponent},
+    {path: '/news', as: 'News', component: NewsComponent},
+    {path: '/gallery', as: 'Gallery', component: GalleryComponent},
+    {path: '/shop', as: 'Shop', component: ShopComponent},
 ])
 
 //Main class for application

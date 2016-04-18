@@ -238,7 +238,7 @@ export class UserService implements ServiceInterface {
             this._apiService.getWithAuth('loginUser')
                 .subscribe(
                     data => this.setUserDetails(data),
-                    error => this._router.navigate(['Login'])
+                    error => this._router.navigate(['/Management', 'Login'])
                 );
         }
 

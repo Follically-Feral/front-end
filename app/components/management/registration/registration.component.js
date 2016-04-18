@@ -49,11 +49,11 @@ System.register(['angular2/core', 'angular2/router', '../../../services/user.ser
                         error: false
                     };
                     // Uncomment below for testing
-                    //this.user.username = 'chris';
-                    //this.user.email = 'chrispratt1985@gmail.com';
-                    //this.regPassword = '10Banana12';
-                    //this.user.forename = 'Christopher';
-                    //this.user.surname = 'Pratt';
+                    this.user.username = 'chris';
+                    this.user.email = 'chrispratt1985@gmail.com';
+                    this.regPassword = '10Banana12';
+                    this.user.forename = 'Christopher';
+                    this.user.surname = 'Pratt';
                 }
                 RegistrationComponent.prototype.ngOnInit = function () {
                     if (this._routeParams.get('id')) {

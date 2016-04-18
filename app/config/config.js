@@ -19,7 +19,7 @@ System.register([], function(exports_1, context_1) {
                     version: '0.0.1',
                     devMode: true,
                     liveAPIUrl: 'https://api.follicallyferal.co.uk/api/',
-                    devAPIUrl: 'https://192.168.0.2/follicalyferal/api/public/index.php/api/'
+                    devAPIUrl: 'http://localhost/follically/api/public/index.php/api/'
                 };
                 return Config;
             }());

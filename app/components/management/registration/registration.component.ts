@@ -37,11 +37,11 @@ export class RegistrationComponent {
         };
 
         // Uncomment below for testing
-        //this.user.username = 'chris';
-        //this.user.email = 'chrispratt1985@gmail.com';
-        //this.regPassword = '10Banana12';
-        //this.user.forename = 'Christopher';
-        //this.user.surname = 'Pratt';
+        this.user.username = 'chris';
+        this.user.email = 'chrispratt1985@gmail.com';
+        this.regPassword = '10Banana12';
+        this.user.forename = 'Christopher';
+        this.user.surname = 'Pratt';
     }
 
     ngOnInit() {

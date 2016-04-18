@@ -4,17 +4,17 @@
 .navbar-default {
     border-color: transparent;
 }
-.navbar-blue {
-    background: #0092FF none;
+.navbar-black {
+    background: #0b0a0a none;
 }
-.navbar-blue a {
+.navbar-black a {
     color: #FFFFFF;
     font-size: 14px;
 }
-.navbar-blue .dropdown-menu li a {
+.navbar-black .dropdown-menu li a {
     color: #000000;
     font-size: 14px;
 }
-.navbar-blue .navbar-brand {
+.navbar-black .navbar-brand {
     font-size: 20px;
 }

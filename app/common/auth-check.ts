@@ -11,7 +11,7 @@ export const authCheck = (next: ComponentInstruction, previous: ComponentInstruc
         if (localStorage.getItem('jwt')) {
             resolve(true);
         } else {
-            router.navigate(['/Login']);
+            router.navigate(['/Management', 'Login']);
             resolve(false);
         }
     });

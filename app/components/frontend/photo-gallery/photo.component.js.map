@@ -1,0 +1,1 @@
+{"version":3,"file":"photo.component.js","sourceRoot":"","sources":["photo.component.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;YAQA;gBAII;oBACI,IAAI,CAAC,KAAK,GAAG,eAAe,CAAC;gBACjC,CAAC;gBAZL;oBAAC,gBAAS,CAAC;wBACP,QAAQ,EAAE,OAAO;wBACjB,WAAW,EAAE,4DAA4D;wBACzE,SAAS,EAAE,CAAC,2DAA2D,CAAC;qBAC3E,CAAC;;kCAAA;gBAUF,qBAAC;YAAD,CAAC,AARD,IAQC;YARD,2CAQC,CAAA"}

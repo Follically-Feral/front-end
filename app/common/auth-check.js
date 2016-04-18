@@ -21,7 +21,7 @@ System.register(['./app-injector', 'angular2/router'], function(exports_1, conte
                         resolve(true);
                     }
                     else {
-                        router.navigate(['/Login']);
+                        router.navigate(['/Management', 'Login']);
                         resolve(false);
                     }
                 });

@@ -211,7 +211,7 @@ System.register(['angular2/core', 'rxjs/Observable', 'angular2/router', 'rxjs/ad
                     // a token set and if so is that token still valid
                     if (localStorage.getItem('jwt')) {
                         this._apiService.getWithAuth('loginUser')
-                            .subscribe(function (data) { return _this.setUserDetails(data); }, function (error) { return _this._router.navigate(['Login']); });
+                            .subscribe(function (data) { return _this.setUserDetails(data); }, function (error) { return _this._router.navigate(['/Management', 'Login']); });
                     }
                 };
                 UserService.prototype.findUsers = function (searchTerm) {

@@ -1,0 +1,10 @@
+*{
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.website-banner{
+	background-image: url('app/assets/images/website-banner.png');
+	background-repeat: no-repeat;
+    background-position: center; 
+	min-height: 250px;
+}
