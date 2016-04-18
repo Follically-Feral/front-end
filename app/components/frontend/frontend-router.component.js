@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../../services/api.service', '../../services/user.service', '../../services/nav.service', './navigation/nav.component', "./home/home.component", "./about/about.component", "./news/news.component", "./shop/shop.component", "./photo-gallery/photo.component", "../../directives/messages/messages.service", "../../directives/tables/table.service", "../../services/table-data.service"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../../services/api.service', '../../services/user.service', '../../services/nav.service', './navigation/nav.component', "./home/home.component", "./about/about.component", "./news/news.component", "./shop/shop.component", "./contact/contact.component", "../../directives/messages/messages.service", "../../directives/tables/table.service", "../../services/table-data.service", "./photo-gallery/photo.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../../services/api.service
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, api_service_1, user_service_1, nav_service_1, nav_component_1, home_component_1, about_component_1, news_component_1, shop_component_1, photo_component_1, messages_service_1, table_service_1, table_data_service_1;
+    var core_1, router_1, api_service_1, user_service_1, nav_service_1, nav_component_1, home_component_1, about_component_1, news_component_1, shop_component_1, contact_component_1, messages_service_1, table_service_1, table_data_service_1, photo_component_1;
     var FrontendRouterComponent;
     return {
         setters:[
@@ -44,8 +44,8 @@ System.register(['angular2/core', 'angular2/router', '../../services/api.service
             function (shop_component_1_1) {
                 shop_component_1 = shop_component_1_1;
             },
-            function (photo_component_1_1) {
-                photo_component_1 = photo_component_1_1;
+            function (contact_component_1_1) {
+                contact_component_1 = contact_component_1_1;
             },
             function (messages_service_1_1) {
                 messages_service_1 = messages_service_1_1;
@@ -55,6 +55,9 @@ System.register(['angular2/core', 'angular2/router', '../../services/api.service
             },
             function (table_data_service_1_1) {
                 table_data_service_1 = table_data_service_1_1;
+            },
+            function (photo_component_1_1) {
+                photo_component_1 = photo_component_1_1;
             }],
         execute: function() {
             FrontendRouterComponent = (function () {
@@ -87,8 +90,9 @@ System.register(['angular2/core', 'angular2/router', '../../services/api.service
                         { path: '/', as: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
                         { path: '/about', as: 'About', component: about_component_1.AboutComponent },
                         { path: '/news', as: 'News', component: news_component_1.NewsComponent },
-                        { path: '/gallery', as: 'Gallery', component: photo_component_1.GalleryComponent },
+                        { path: '/gallery', as: 'Gallery', component: photo_component_1.PhotoComponent },
                         { path: '/shop', as: 'Shop', component: shop_component_1.ShopComponent },
+                        { path: '/contact', as: 'Contact', component: contact_component_1.ContactComponent },
                     ]), 
                     __metadata('design:paramtypes', [user_service_1.UserService])
                 ], FrontendRouterComponent);
