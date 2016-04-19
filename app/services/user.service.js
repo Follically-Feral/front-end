@@ -115,6 +115,10 @@ System.register(['angular2/core', 'rxjs/Observable', 'angular2/router', 'rxjs/ad
                         });
                     }
                 };
+                UserService.prototype.getUserWithPermissions = function () {
+                    return this._apiService.getPromiseWithAuth('findPermissionsForUser/' + this._user.id)
+                        .then(function (data) { return data; }, function (error) { return console.log(error); });
+                };
                 UserService.prototype.set = function (user) {
                     this._user = user;
                     this._userObserver.next(this._user);
@@ -201,18 +205,6 @@ System.register(['angular2/core', 'rxjs/Observable', 'angular2/router', 'rxjs/ad
                             _this.updateUserInUsers(userObject);
                         });
                     });
-                };
-                /*
-                 @todo Move this into a better place
-                 */
-                UserService.prototype.loggedInCheck = function () {
-                    var _this = this;
-                    // Check that the user is logged in by first checking that they have
-                    // a token set and if so is that token still valid
-                    if (localStorage.getItem('jwt')) {
-                        this._apiService.getWithAuth('loginUser')
-                            .subscribe(function (data) { return _this.setUserDetails(data); }, function (error) { return _this._router.navigate(['/Management', 'Login']); });
-                    }
                 };
                 UserService.prototype.findUsers = function (searchTerm) {
                     return this._apiService.getPromiseWithAuth('findUsers/' + searchTerm)

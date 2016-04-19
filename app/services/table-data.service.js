@@ -38,7 +38,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     if (updateTableConfig === void 0) { updateTableConfig = true; }
                     return Promise.resolve(users).then(function (users) {
                         if (updateTableConfig) {
-                            _this.updateTableConfig(paginatorData, 'users-paginator', '\UserDetail');
+                            _this.updateTableConfig(paginatorData, 'users-paginator', 'UserDetail');
                         }
                         _this.table.body.rows = [];
                         _this.table.headers = [
@@ -71,7 +71,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     if (updateTableConfig === void 0) { updateTableConfig = true; }
                     return Promise.resolve(groups).then(function (groups) {
                         if (updateTableConfig) {
-                            _this.updateTableConfig(paginatorData, 'groups-paginator', '\GroupDetail');
+                            _this.updateTableConfig(paginatorData, 'groups-paginator', 'GroupDetail');
                         }
                         _this.table.body.rows = [];
                         _this.table.headers = [
@@ -84,6 +84,44 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                                 cells: [
                                     { value: group.name, detailCell: true, clickEvent: false },
                                     { value: group.description, detailCell: false, clickEvent: false },
+                                ]
+                            });
+                        }, _this);
+                        return _this.table;
+                    });
+                };
+                TableDataService.prototype.getModuleTableData = function (modules, updateTableConfig, paginatorData) {
+                    if (updateTableConfig === void 0) { updateTableConfig = true; }
+                };
+                TableDataService.prototype.getModuleSectionTableData = function (moduleSections, updateTableConfig, paginatorData) {
+                    if (updateTableConfig === void 0) { updateTableConfig = true; }
+                };
+                TableDataService.prototype.getPermissionTableData = function (permissions, updateTableConfig, paginatorData) {
+                    var _this = this;
+                    if (updateTableConfig === void 0) { updateTableConfig = true; }
+                    return Promise.resolve(permissions).then(function (permissions) {
+                        if (updateTableConfig) {
+                            _this.updateTableConfig(paginatorData, 'permissions-paginator', 'PermissionDetail');
+                        }
+                        _this.table.body.rows = [];
+                        _this.table.headers = [
+                            { value: 'Name', show: true },
+                            { value: 'Description', show: true },
+                            { value: 'View', show: true },
+                            { value: 'Add', show: true },
+                            { value: 'Edit', show: true },
+                            { value: 'Delete', show: true }
+                        ];
+                        permissions.forEach(function (permission) {
+                            this.table.body.rows.push({
+                                rowId: permission.id,
+                                cells: [
+                                    { value: permission.name, detailCell: true, clickEvent: false },
+                                    { value: permission.description, detailCell: false, clickEvent: false },
+                                    { value: permission.view, detailCell: false, clickEvent: false },
+                                    { value: permission.add, detailCell: false, clickEvent: false },
+                                    { value: permission.edit, detailCell: false, clickEvent: false },
+                                    { value: permission.delete, detailCell: false, clickEvent: false }
                                 ]
                             });
                         }, _this);

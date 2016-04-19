@@ -1,5 +1,6 @@
-import {ModuleSection} from "./module.section";
 import {Menu} from "./menu";
+import {ModuleSection} from "./module-section";
+import {Permission} from "./permission";
 
 export class Module {
 
@@ -9,14 +10,16 @@ export class Module {
     private _description    : string;
     private _sections       : Array<ModuleSection>;
     private _menus          : Array<Menu>;
+    private _permission     : Permission;
 
-    constructor(id:number, key:string, name:string, description:string) {
-        this._id = id;
-        this._key = key;
-        this._name = name;
-        this._description = description;
+    constructor(id?:number, key?:string, name?:string, description?:string) {
+        this._id = id || null;
+        this._key = key || '';
+        this._name = name || '';
+        this._description = description || '';
         this._sections = [];
         this._menus = [];
+        this._permission = new Permission();
     }
 
     get id():number {
@@ -65,6 +68,14 @@ export class Module {
 
     set menus(value:Array<Menu>) {
         this._menus = value;
+    }
+
+    get permission():Permission {
+        return this._permission;
+    }
+
+    set permission(value:Permission) {
+        this._permission = value;
     }
 
 }

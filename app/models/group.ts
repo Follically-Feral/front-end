@@ -1,5 +1,4 @@
 import {User}       from "./user";
-import {Project}    from "./project";
 
 export class Group {
 
@@ -7,9 +6,13 @@ export class Group {
     private _name : string;
     private _description : string;
     private _users : Array<User> = [];
-    private _projects : Array<Project> = [];
 
-    constructor() {}
+    constructor(id?: number, name?: string, description?: string) {
+        this._id = id || null;
+        this._name = name || '';
+        this._description = description || '';
+        this._users = [];
+    }
 
     get id():number {
         return this._id;
@@ -41,14 +44,6 @@ export class Group {
 
     set users(value:Array<User>) {
         this._users = value;
-    }
-
-    get projects():Array<Project> {
-        return this._projects;
-    }
-
-    set projects(value:Array<Project>) {
-        this._projects = value;
     }
     
 }

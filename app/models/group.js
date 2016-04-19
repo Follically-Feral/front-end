@@ -6,9 +6,12 @@ System.register([], function(exports_1, context_1) {
         setters:[],
         execute: function() {
             Group = (function () {
-                function Group() {
+                function Group(id, name, description) {
                     this._users = [];
-                    this._projects = [];
+                    this._id = id || null;
+                    this._name = name || '';
+                    this._description = description || '';
+                    this._users = [];
                 }
                 Object.defineProperty(Group.prototype, "id", {
                     get: function () {
@@ -46,16 +49,6 @@ System.register([], function(exports_1, context_1) {
                     },
                     set: function (value) {
                         this._users = value;
-                    },
-                    enumerable: true,
-                    configurable: true
-                });
-                Object.defineProperty(Group.prototype, "projects", {
-                    get: function () {
-                        return this._projects;
-                    },
-                    set: function (value) {
-                        this._projects = value;
                     },
                     enumerable: true,
                     configurable: true

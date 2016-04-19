@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "../../../common/auth-check", '../../../services/user.service', "./users/users.component", "./users/userDetail/user-detail.component", "./groups/groups.component", "./groups/groupDetail/group-detail.component"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', "../../../common/auth-check", "./users/users.component", "./users/userDetail/user-detail.component", "./groups/groups.component", "./groups/groupDetail/group-detail.component", "./permissions/permissionDetail/permission-detail.component", "./permissions/permissions.component", "../../../services/auth.service", "../../../services/module.service", "../../../models/module"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', "../../../common/auth-check
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, auth_check_1, user_service_1, users_component_1, user_detail_component_1, groups_component_1, group_detail_component_1;
+    var core_1, router_1, auth_check_1, users_component_1, user_detail_component_1, groups_component_1, group_detail_component_1, permission_detail_component_1, permissions_component_1, auth_service_1, module_service_1, module_1;
     var UserManagementComponent;
     return {
         setters:[
@@ -23,9 +23,6 @@ System.register(['angular2/core', 'angular2/router', "../../../common/auth-check
             function (auth_check_1_1) {
                 auth_check_1 = auth_check_1_1;
             },
-            function (user_service_1_1) {
-                user_service_1 = user_service_1_1;
-            },
             function (users_component_1_1) {
                 users_component_1 = users_component_1_1;
             },
@@ -37,17 +34,35 @@ System.register(['angular2/core', 'angular2/router', "../../../common/auth-check
             },
             function (group_detail_component_1_1) {
                 group_detail_component_1 = group_detail_component_1_1;
+            },
+            function (permission_detail_component_1_1) {
+                permission_detail_component_1 = permission_detail_component_1_1;
+            },
+            function (permissions_component_1_1) {
+                permissions_component_1 = permissions_component_1_1;
+            },
+            function (auth_service_1_1) {
+                auth_service_1 = auth_service_1_1;
+            },
+            function (module_service_1_1) {
+                module_service_1 = module_service_1_1;
+            },
+            function (module_1_1) {
+                module_1 = module_1_1;
             }],
         execute: function() {
             UserManagementComponent = (function () {
-                function UserManagementComponent(_userService) {
-                    this._userService = _userService;
+                function UserManagementComponent(_authService, _moduleService) {
+                    this._authService = _authService;
+                    this._moduleService = _moduleService;
                     this.title = 'User Management';
+                    this._module = new module_1.Module();
                 }
                 UserManagementComponent.prototype.ngOnInit = function () {
                     var _this = this;
-                    this._userService.user$.subscribe(function (updatedUser) { return _this._user = updatedUser; });
-                    this._userService.loggedInCheck();
+                    this._moduleService.module$.subscribe(function (module) { return _this._module = module; });
+                    this._moduleService.firstCall();
+                    this._authService.loggedInCheck();
                 };
                 UserManagementComponent = __decorate([
                     core_1.Component({
@@ -60,12 +75,14 @@ System.register(['angular2/core', 'angular2/router', "../../../common/auth-check
                         { path: '/users', name: 'Users', component: users_component_1.UsersComponent, useAsDefault: true },
                         { path: '/users/userDetail/:id', name: 'UserDetail', component: user_detail_component_1.UserDetail },
                         { path: '/groups', name: 'Groups', component: groups_component_1.GroupsComponent },
-                        { path: '/groups/groupDetail/:id', name: 'GroupDetail', component: group_detail_component_1.GroupDetailComponent }
+                        { path: '/groups/groupDetail/:id', name: 'GroupDetail', component: group_detail_component_1.GroupDetailComponent },
+                        { path: '/permissions', name: 'Permissions', component: permissions_component_1.PermissionsComponent },
+                        { path: '/permissions/permissionDetail/:id', name: 'PermissionDetail', component: permission_detail_component_1.PermissionDetailComponent }
                     ]),
                     router_1.CanActivate(function (next, previous) {
                         return auth_check_1.authCheck(next, previous);
                     }), 
-                    __metadata('design:paramtypes', [user_service_1.UserService])
+                    __metadata('design:paramtypes', [auth_service_1.AuthService, module_service_1.ModuleService])
                 ], UserManagementComponent);
                 return UserManagementComponent;
             }());

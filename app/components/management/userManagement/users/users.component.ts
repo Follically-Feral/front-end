@@ -8,6 +8,8 @@ import {UserService}        from "../../../../services/user.service";
 import {User}               from "../../../../models/user";
 import {TableDirective}     from "../../../../directives/tables/table.directive";
 import {MessagesDirective}  from "../../../../directives/messages/messages.directive";
+import {Permission} from "../../../../models/permission";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
     selector: 'users',
@@ -31,7 +33,10 @@ export class UsersComponent {
     public user2            : User;
     public user3            : User;
 
-    constructor(private _userService:UserService) {
+    private _moduleSectionName = 'User Management';
+    pagePermission: Permission = new Permission();
+
+    constructor(private _userService:UserService, private _authService: AuthService) {
         this.title = 'Users';
         this.active = true;
 
@@ -42,7 +47,9 @@ export class UsersComponent {
 
     ngOnInit() {
         this._userService.users$.subscribe(updatedUser => this.users = updatedUser);
-        this._userService.getUsers(1, false, true);
+        this._userService.getUsers(1, true, true);
+        this._authService.getPagePermissions(this._moduleSectionName)
+            .then(permission => this.pagePermission = permission);
     }
 
     onSubmit() {

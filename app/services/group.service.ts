@@ -34,11 +34,11 @@ export class GroupService implements ServiceInterface {
 
     create(groupData) : Group {
 
-        let group = new Group();
-        group.id = groupData.id;
-        group.name = groupData.name;
-        group.description = groupData.description;
-        return group;
+        return new Group(
+            groupData.id,
+            groupData.name,
+            groupData.description
+        );
 
     }
 
@@ -165,6 +165,27 @@ export class GroupService implements ServiceInterface {
 
     }
 
+    findGroups(searchTerm: string) {
+
+        return this._apiService.getPromiseWithAuth('findGroups/'+searchTerm)
+            .then(
+                data => {
+                    let groupData = [];
+                    data.data.forEach(group => {
+                        groupData.push({
+                            id: group.id,
+                            name: group.name
+                        });
+                    });
+                    return groupData;
+                },
+                error => {
+                    return [];
+                }
+            );
+
+    }
+
     addUserToGroup(groupId: number, userId: number) {
 
         return this._apiService.patchPromise('addUserToGroup/'+groupId, {user_id: userId})
@@ -224,12 +245,10 @@ export class GroupService implements ServiceInterface {
         for(let key in groupsData.data) {
             let groupInfo;
             let groupUsers;
-            let groupProjects;
 
             if (groupsData.data.hasOwnProperty(key)) {
                 groupInfo = groupsData.data[key].group;
                 groupUsers = groupsData.data[key].users;
-                groupProjects = groupsData.data[key].projects;
             }
 
             let group = this.create(groupInfo);

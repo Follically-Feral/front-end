@@ -20,6 +20,10 @@ import {RegistrationComponent}      from "./registration/registration.component"
 
 import {Module} from "../../models/module";
 import {Menu}   from "../../models/menu";
+import {ModuleSectionService} from "../../services/module-section.service";
+import {PermissionService} from "../../services/permission.service";
+import {AuthService} from "../../services/auth.service";
+import {User} from "../../models/user";
 
 @Component({
     selector: 'FF-Management',
@@ -32,14 +36,17 @@ import {Menu}   from "../../models/menu";
     ],
     providers: [
         ApiService,
-        UserService,
-        ModuleService,
         HelpersService,
         FormDataService,
         TableDataService,
         MessagesService,
         TableService,
-        GroupService
+        UserService,
+        GroupService,
+        ModuleService,
+        ModuleSectionService,
+        PermissionService,
+        AuthService
     ]
 })
 
@@ -54,47 +61,42 @@ import {Menu}   from "../../models/menu";
 //Main class for application
 export class ManagementRouterComponent {
 
-    public appRoutes : string[][];
-    public error     : any;
-    public user      : any;
+    appRoutes:string[][];
+    error:any;
+    user: User = new User();
+    module: Module = new Module();
+
+    private _moduleName = 'Management Module';
 
     constructor(
-        private _navService:NavService,
-        private _apiService:ApiService,
         private _userService:UserService,
-        private _moduleService:ModuleService
-    ) {
+        private _moduleService:ModuleService,
+        private _authService: AuthService
+    ){
         // this.appRoutes = this.getAppRoutes();
     }
 
     ngOnInit() {
         this._userService.user$.subscribe(user => this.user = user);
-        this._userService.loggedInCheck();
-        // this.getModules();
+        this._moduleService.module$.subscribe(module => this.module = module);
+        this._moduleService.getModule(this._moduleName).then(() => {
+            this._authService.setup(this._moduleName);
+        });
     }
 
-    // Load information for modules
-    private getModules() {
-        this._apiService.get('modules')
-            .subscribe(
-                data => this._moduleService.createModules(data.data),
-                error => console.log(error)
-            );
-    }
-
-    // Needs further work to get the component part of the route converted from a string to a type
-    private buildMainMenus() {
-        this._moduleService.modules.forEach(function(module:Module) {
-            module.menus.forEach(function(menu:Menu) {
-                if (menu.link) {
-                    let route = {path: menu.link, component: window[menu.component], as: menu.name};
-                    console.log(route);
-                    this._navService.addRoute(this.constructor, route);
-                    this.appRoutes = this.getAppRoutes();
-                }
-            }, this);
-        }, this);
-    }
+    // // Needs further work to get the component part of the route converted from a string to a type
+    // private buildMainMenus() {
+    //     this._moduleService.modules.forEach(function(module:Module) {
+    //         module.menus.forEach(function(menu:Menu) {
+    //             if (menu.link) {
+    //                 let route = {path: menu.link, component: window[menu.component], as: menu.name};
+    //                 console.log(route);
+    //                 this._navService.addRoute(this.constructor, route);
+    //                 this.appRoutes = this.getAppRoutes();
+    //             }
+    //         }, this);
+    //     }, this);
+    // }
 
     // Get routes currently set in the nav service
     // private getAppRoutes():string[][] {

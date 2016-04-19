@@ -6,7 +6,9 @@ import {TableHeader} from "../directives/tables/interfaces/table-header.interfac
 import {TableRow} from "../directives/tables/interfaces/table-row.interface";
 import {TableCell} from "../directives/tables/interfaces/table-cell.interface";
 import {Group} from "../models/group";
-import {Project} from "../models/project";
+import {Module} from "../models/module";
+import {ModuleSection} from "../models/module-section";
+import {Permission} from "../models/permission";
 
 @Injectable()
 export class TableDataService {
@@ -32,7 +34,7 @@ export class TableDataService {
 
         return Promise.resolve(users).then(users => {
             if (updateTableConfig) {
-                this.updateTableConfig(paginatorData, 'users-paginator', '\UserDetail');
+                this.updateTableConfig(paginatorData, 'users-paginator', 'UserDetail');
             }
 
             this.table.body.rows = [];
@@ -75,7 +77,7 @@ export class TableDataService {
         return Promise.resolve(groups).then(groups => {
 
             if (updateTableConfig) {
-                this.updateTableConfig(paginatorData, 'groups-paginator', '\GroupDetail');
+                this.updateTableConfig(paginatorData, 'groups-paginator', 'GroupDetail');
             }
 
             this.table.body.rows = [];
@@ -91,6 +93,64 @@ export class TableDataService {
                     cells: [
                         <TableCell>{value: group.name, detailCell: true, clickEvent: false},
                         <TableCell>{value: group.description, detailCell: false, clickEvent: false},
+                    ]
+                })
+            }, this);
+
+            return this.table;
+        });
+
+    }
+
+    getModuleTableData(
+        modules: Array<Module>,
+        updateTableConfig:boolean = true,
+        paginatorData?: any
+    ) {
+
+    }
+
+    getModuleSectionTableData(
+        moduleSections: Array<ModuleSection>,
+        updateTableConfig:boolean = true,
+        paginatorData?: any
+    ) {
+
+    }
+
+    getPermissionTableData(
+        permissions: Array<Permission>,
+        updateTableConfig:boolean = true,
+        paginatorData?: any
+    ) : Promise {
+
+        return Promise.resolve(permissions).then(permissions => {
+
+            if (updateTableConfig) {
+                this.updateTableConfig(paginatorData, 'permissions-paginator', 'PermissionDetail');
+            }
+
+            this.table.body.rows = [];
+
+            this.table.headers = [
+                <TableHeader>{value: 'Name', show: true},
+                <TableHeader>{value: 'Description', show: true},
+                <TableHeader>{value: 'View', show: true},
+                <TableHeader>{value: 'Add', show: true},
+                <TableHeader>{value: 'Edit', show: true},
+                <TableHeader>{value: 'Delete', show: true}
+            ];
+
+            permissions.forEach(function (permission:Permission) {
+                this.table.body.rows.push(<TableRow>{
+                    rowId: permission.id,
+                    cells: [
+                        <TableCell>{value: permission.name, detailCell: true, clickEvent: false},
+                        <TableCell>{value: permission.description, detailCell: false, clickEvent: false},
+                        <TableCell>{value: permission.view, detailCell: false, clickEvent: false},
+                        <TableCell>{value: permission.add, detailCell: false, clickEvent: false},
+                        <TableCell>{value: permission.edit, detailCell: false, clickEvent: false},
+                        <TableCell>{value: permission.delete, detailCell: false, clickEvent: false}
                     ]
                 })
             }, this);

@@ -108,6 +108,16 @@ export class UserService implements ServiceInterface {
 
     }
 
+    getUserWithPermissions() : Promise {
+
+        return this._apiService.getPromiseWithAuth('findPermissionsForUser/'+this._user.id)
+            .then(
+                data => {return data},
+                error => console.log(error)
+            );
+
+    }
+
     set(user: User) {
 
         this._user = user;
@@ -224,23 +234,6 @@ export class UserService implements ServiceInterface {
                 });
             }
         );
-
-    }
-    
-    /*
-     @todo Move this into a better place
-     */
-    loggedInCheck() {
-        
-        // Check that the user is logged in by first checking that they have
-        // a token set and if so is that token still valid
-        if (localStorage.getItem('jwt')) {
-            this._apiService.getWithAuth('loginUser')
-                .subscribe(
-                    data => this.setUserDetails(data),
-                    error => this._router.navigate(['/Management', 'Login'])
-                );
-        }
 
     }
 
