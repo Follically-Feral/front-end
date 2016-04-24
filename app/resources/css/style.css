@@ -2,9 +2,9 @@ html, body {
     font-family: Cambria, serif;
     height: 100%;
 }
-.container-fluid {
+/*.container-fluid {
     height: 100%;
-}
+}*/
 .router-outlet {
     display: none;
     height: 0;

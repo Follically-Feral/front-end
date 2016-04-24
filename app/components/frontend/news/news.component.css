@@ -3,16 +3,15 @@
 }
 
 .news-reel{
-	padding-top: 3%;
-	padding-bottom: 3%;
+	padding-bottom: 5%;
 }
 
 .news-item-image img{
 	display: block;
 	margin-right: auto;
 	margin-left: auto;
-	max-width: 375px;
-	max-height: 200px;
+	max-width: 100%;
+	max-height: 75%;
 }
 
 .news-reel h3{
@@ -21,8 +20,9 @@
 }
 
 .news-item-space{
-	margin-right: 4%;
-	margin-left: 4%;
+	margin-right: 4.1%;
+	margin-left: 4.1%;
+	margin-top: 15px;
 }
 
 .news-item-title{
@@ -37,7 +37,17 @@
 }
 
 .news-item{
-	background-color: #0b0a0a;
+	background-color: #D1D1D1;
+	border:none;
+	border-radius: 3px;
 	padding-top: 4px;
-	color: #fff;
+	text-decoration: none;
+	color: #000;
+	-webkit-transition: background-color 0.5s; /* Safari */
+    transition: background-color 0.5s;
 }
+
+	.news-item:hover{
+		background-color: #fff;
+		padding-top: 4px;
+	}

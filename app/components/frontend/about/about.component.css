@@ -4,7 +4,19 @@
 
 .website-banner{
 	background-image: url('app/assets/images/website-banner.png');
+	background-size: contain;
 	background-repeat: no-repeat;
     background-position: center; 
 	min-height: 250px;
+	margin-bottom: 30px;
+}
+
+.company-about{
+	width: 90%;
+	font-size: 15px;
+}
+
+.company-what-we-do{
+	width: 90%;
+	font-size: 15px;
 }
